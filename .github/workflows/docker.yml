@@ -36,6 +36,8 @@ jobs:
           file: ./Dockerfile.selfhosted
           platforms: linux/amd64,linux/arm64
           push: true
+          provenance: false
+          sbom: false
           tags: |
             ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/flexvault:latest
             ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/flexvault:${{ github.event.inputs.tag }}

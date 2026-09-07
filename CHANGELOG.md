@@ -4,6 +4,11 @@
 
 本仓库在 [NodeWarden](https://github.com/shuaiplus/nodewarden) 基础上新增了 Node.js 自托管部署能力，并保持与 Cloudflare Workers 部署模式完全兼容。
 
+### 修复（2026-09-07, commit `pending`）
+- 修复 GitHub Actions 构建 Docker 镜像推送到阿里云 ACR 失败的问题，错误信息 `denied: unknown manifest class for application/vnd.oci.empty.v1+json`
+- 原因：`docker/build-push-action@v5` 默认启用 provenance 和 SBOM attestation，生成的 OCI empty manifest（`application/vnd.oci.empty.v1+json`）不被阿里云 ACR 支持
+- 修复：在 `docker.yml` 中添加 `provenance: false` 和 `sbom: false` 禁用 attestation 生成
+
 ## [1.8.0] - 2026-08-31
 
 > 对应 commit: `d3098ae`(2026-08-29 上游快照) → `5c7adf1`(2026-08-31 合并) → `6400fc9`(2026-08-31 适配) → `c0e2862` → `61014f7` → `47e56ea` → `c4766f9`
